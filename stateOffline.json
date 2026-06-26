@@ -1,0 +1,346 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.5",
+  "serial": 26,
+  "lineage": "d13455dc-304e-d942-6a4b-58711e383c16",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "coder_provisioner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arch": "amd64",
+            "id": "c6e84109-e865-4d53-98e6-9b46a24b6084",
+            "os": "linux"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "coder_workspace",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "access_port": 3000,
+            "access_url": "http://172.25.144.41:3000",
+            "id": "666829ac-5463-4e1f-b452-2ac3a2e4e8f1",
+            "is_prebuild": false,
+            "is_prebuild_claim": false,
+            "name": "git-test",
+            "prebuild_count": 0,
+            "start_count": 0,
+            "template_id": "57331916-ced2-487c-9dfb-8b0150c6187b",
+            "template_name": "js-docker",
+            "template_version": "thoughtful_gregory86",
+            "transition": "stop"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "coder_workspace_owner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "email": "janik.schoepper@cgi.com",
+            "full_name": "default",
+            "groups": [
+              "Everyone"
+            ],
+            "id": "0eba1674-9663-4ca4-bf8b-29ba820cda88",
+            "login_type": "github",
+            "name": "schoepperjanikcgi",
+            "oidc_access_token": "",
+            "rbac_roles": [
+              {
+                "name": "owner",
+                "org_id": ""
+              },
+              {
+                "name": "member",
+                "org_id": ""
+              },
+              {
+                "name": "organization-member",
+                "org_id": "eef977e7-2354-430e-9ba5-6baec232e961"
+              }
+            ],
+            "session_token": "",
+            "ssh_private_key": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\nc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90dt3fbwaYBQ3KaatHoAAA\nAIjxRADO8UQAzgAAAAtzc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90\ndt3fbwaYBQ3KaatHoAAAAEBeLYXTDRunpTr5ZVAMo8bWZLK0ZX41gqGn/QXQYG17\n9wKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0egAAAAAAECAwQF\n-----END OPENSSH PRIVATE KEY-----\n",
+            "ssh_public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0eg\n"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "oidc_access_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "session_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "ssh_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_agent",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api_key_scope": "all",
+            "arch": "amd64",
+            "auth": "token",
+            "connection_timeout": 120,
+            "dir": null,
+            "display_apps": [
+              {
+                "port_forwarding_helper": true,
+                "ssh_helper": true,
+                "vscode": true,
+                "vscode_insiders": false,
+                "web_terminal": true
+              }
+            ],
+            "env": {
+              "CURL_CA_BUNDLE": "/etc/ssl/certs/ca-certificates.crt",
+              "GIT_AUTHOR_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_AUTHOR_NAME": "default",
+              "GIT_COMMITTER_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_COMMITTER_NAME": "default",
+              "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt",
+              "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt"
+            },
+            "id": "2fbea4c5-5763-4e0f-b7ba-85685d3d8c69",
+            "init_script": "#!/usr/bin/env sh\nset -eux\n# Sleep for a good long while before exiting.\n# This is to allow folks to exec into a failed workspace and poke around to\n# troubleshoot.\nwaitonexit() {\n\techo \"=== Agent script exited with non-zero code ($?). Sleeping 24h to preserve logs...\"\n\tsleep 86400\n}\ntrap waitonexit EXIT\nBINARY_DIR=\"${BINARY_DIR:-$(mktemp -d -t coder.XXXXXX)}\"\nBINARY_NAME=coder\nBINARY_URL=http://172.25.144.41:3000/bin/coder-linux-amd64\ncd \"$BINARY_DIR\"\n# Attempt to download the coder agent.\n# This could fail for a number of reasons, many of which are likely transient.\n# So just keep trying!\nwhile :; do\n\t# Try a number of different download tools, as we don not know what we\n\t# will have available.\n\tstatus=\"\"\n\tif command -v curl \u003e/dev/null 2\u003e\u00261; then\n\t\tcurl -fsSL --compressed \"${BINARY_URL}\" -o \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v wget \u003e/dev/null 2\u003e\u00261; then\n\t\twget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v busybox \u003e/dev/null 2\u003e\u00261; then\n\t\tbusybox wget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telse\n\t\techo \"error: no download tool found, please install curl, wget or busybox wget\"\n\t\texit 127\n\tfi\n\techo \"error: failed to download coder agent\"\n\techo \"       command returned: ${status}\"\n\techo \"Trying again in 30 seconds...\"\n\tsleep 30\ndone\n\nif ! chmod +x $BINARY_NAME; then\n\techo \"Failed to make $BINARY_NAME executable\"\n\texit 1\nfi\n\nhaslibcap2() {\n\tcommand -v setcap /dev/null 2\u003e\u00261\n\tcommand -v capsh /dev/null 2\u003e\u00261\n}\nprintnetadminmissing() {\n\techo \"The root user does not have CAP_NET_ADMIN permission. \" + \\\n\t\t\"If running in Docker, add the capability to the container for \" + \\\n\t\t\"improved network performance.\"\n\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n}\n\n# Attempt to add CAP_NET_ADMIN to the agent binary. This allows us to increase\n# network buffers which improves network transfer speeds.\nif [ -n \"${USE_CAP_NET_ADMIN:-}\" ]; then\n\t# If running as root, we do not need to do anything.\n\tif [ \"$(id -u)\" -eq 0 ]; then\n\t\techo \"Running as root, skipping setcap\"\n\t\t# Warn the user if root does not have CAP_NET_ADMIN.\n\t\tif ! capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If not running as root, make sure we have sudo perms and the \"setcap\" +\n\t# \"capsh\" binaries exist.\n\telif sudo -nl \u0026\u0026 haslibcap2; then\n\t\t# Make sure the root user has CAP_NET_ADMIN.\n\t\tif sudo -n capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tsudo -n setcap CAP_NET_ADMIN=+ep ./$BINARY_NAME || true\n\t\telse\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If we are not running as root, cant sudo, and \"setcap\" does not exist, we\n\t# cannot do anything.\n\telse\n\t\techo \"Unable to setcap agent binary. To enable improved network performance, \" + \\\n\t\t\t\"give the agent passwordless sudo permissions and the \\\"setcap\\\" + \\\"capsh\\\" binaries.\"\n\t\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n\tfi\nfi\n\nexport CODER_AGENT_AUTH=\"token\"\nexport CODER_AGENT_URL=\"http://172.25.144.41:3000/\"\n\noutput=$(./${BINARY_NAME} --version | head -n1)\nif ! echo \"${output}\" | grep -q Coder; then\n\techo \u003e\u00262 \"ERROR: Downloaded agent binary returned unexpected version output\"\n\techo \u003e\u00262 \"${BINARY_NAME} --version output: \\\"${output}\\\"\"\n\texit 2\nfi\n\nexec ./${BINARY_NAME} agent\n",
+            "metadata": [
+              {
+                "display_name": "CPU Usage",
+                "interval": 10,
+                "key": "0_cpu_usage",
+                "order": 0,
+                "script": "coder stat cpu",
+                "timeout": 1
+              },
+              {
+                "display_name": "RAM Usage",
+                "interval": 10,
+                "key": "1_ram_usage",
+                "order": 0,
+                "script": "coder stat mem",
+                "timeout": 1
+              },
+              {
+                "display_name": "Home Disk",
+                "interval": 60,
+                "key": "3_home_disk",
+                "order": 0,
+                "script": "coder stat disk --path ${HOME}",
+                "timeout": 1
+              },
+              {
+                "display_name": "CPU Usage (Host)",
+                "interval": 10,
+                "key": "4_cpu_usage_host",
+                "order": 0,
+                "script": "coder stat cpu --host",
+                "timeout": 1
+              },
+              {
+                "display_name": "Memory Usage (Host)",
+                "interval": 10,
+                "key": "5_mem_usage_host",
+                "order": 0,
+                "script": "coder stat mem --host",
+                "timeout": 1
+              },
+              {
+                "display_name": "Load Average (Host)",
+                "interval": 60,
+                "key": "6_load_host",
+                "order": 0,
+                "script": "      echo \"`cat /proc/loadavg | awk '{ print $1 }'` `nproc`\" | awk '{ printf \"%0.2f\", $1/$2 }'\n",
+                "timeout": 1
+              },
+              {
+                "display_name": "Swap Usage (Host)",
+                "interval": 10,
+                "key": "7_swap_host",
+                "order": 0,
+                "script": "      free -b | awk '/^Swap/ { printf(\"%.1f/%.1f\", $3/1024.0/1024.0/1024.0, $2/1024.0/1024.0/1024.0) }'\n",
+                "timeout": 1
+              }
+            ],
+            "motd_file": null,
+            "order": null,
+            "os": "linux",
+            "resources_monitoring": [],
+            "shutdown_script": null,
+            "startup_script": "#set -e\nset -ex\n# Prepare user home with default files on first start.\nif [ ! -f ~/.init_done ]; then\n  cp -rT /etc/skel ~\n  touch ~/.init_done\nfi\n\n# Add any commands that should be executed at workspace startup (e.g install requirements, start a program, etc) here\n\nmkdir -p ~/.ssh\n\nif ! grep -q github.com ~/.ssh/known_hosts 2\u003e/dev/null; then\n  ssh-keyscan github.com \u003e\u003e ~/.ssh/known_hosts\nfi\n\necho \"Test if git exists\"\ngit --version\necho \"GIT_SSH_COMMAND=$GIT_SSH_COMMAND\"\nenv | grep GIT\n\necho \"Test if git clone works\"\nif [ ! -d ~/nodejs-test ]; then\n  echo \"Actually cloning...\"\n  git clone git@github.com:schoepperjanikcgi/nodejs-test.git\nfi\n\necho \"Git clone finish\"\nnode /home/coder/nodejs-test/hello.js \n\necho \"Install vscode extensions\"\n#which code-server\n#code-server --list-extensions\n#code --extensions-dir ~/.vscode-server/extensions --install-extension \"dbaeumer.vscode-eslint\"\necho \"test\"\n\n\n    \necho \"start navigating and try npm run dev\"\ncd  /home/coder/nodejs-test/\n#npm run dev\n#npm run dev \u0026\n",
+            "startup_script_behavior": "non-blocking",
+            "token": "418df0e8-ee84-4c43-b597-4b84eddf266b",
+            "troubleshooting_url": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "token"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "data.coder_provisioner.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_volume",
+      "name": "home_volume",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "cluster": [],
+            "driver": "local",
+            "driver_opts": {},
+            "id": "coder-666829ac-5463-4e1f-b452-2ac3a2e4e8f1-home",
+            "labels": [
+              {
+                "label": "coder.owner",
+                "value": "schoepperjanikcgi"
+              },
+              {
+                "label": "coder.owner_id",
+                "value": "0eba1674-9663-4ca4-bf8b-29ba820cda88"
+              },
+              {
+                "label": "coder.workspace_id",
+                "value": "666829ac-5463-4e1f-b452-2ac3a2e4e8f1"
+              },
+              {
+                "label": "coder.workspace_name_at_creation",
+                "value": "git-test"
+              }
+            ],
+            "mountpoint": "/var/lib/docker/volumes/coder-666829ac-5463-4e1f-b452-2ac3a2e4e8f1-home/_data",
+            "name": "coder-666829ac-5463-4e1f-b452-2ac3a2e4e8f1-home"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": [
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.releases_base_link",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.download_base_link",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.workspace",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.channel",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.share",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.major_version",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.options",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.open_in",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.folder",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.jetbrains.var.ide_config",
+      "status": "pass",
+      "objects": null
+    },
+    {
+      "object_kind": "resource",
+      "config_addr": "module.code-server.coder_script.code-server",
+      "status": "pass",
+      "objects": null
+    }
+  ]
+}
+

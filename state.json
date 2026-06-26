@@ -1,0 +1,1565 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.5",
+  "serial": 80,
+  "lineage": "78c986b1-8ee4-293d-12c3-73bdf59ea698",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "coder_provisioner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arch": "amd64",
+            "id": "7e63a2f3-f7c3-43cc-8869-e37e82719f75",
+            "os": "linux"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "coder_workspace",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "access_port": 3000,
+            "access_url": "http://172.25.144.41:3000",
+            "id": "6ec1ce00-0b53-4555-ac6f-a4cc07b42879",
+            "is_prebuild": false,
+            "is_prebuild_claim": false,
+            "name": "CustomEverything",
+            "prebuild_count": 0,
+            "start_count": 1,
+            "template_id": "3d74e22e-0ade-44fd-a746-ebe40149f0ce",
+            "template_name": "js-docker-git-custom",
+            "template_version": "red_lowe86",
+            "transition": "start"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "coder_workspace_owner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "email": "janik.schoepper@cgi.com",
+            "full_name": "default",
+            "groups": [
+              "Everyone"
+            ],
+            "id": "0eba1674-9663-4ca4-bf8b-29ba820cda88",
+            "login_type": "github",
+            "name": "schoepperjanikcgi",
+            "oidc_access_token": "",
+            "rbac_roles": [
+              {
+                "name": "owner",
+                "org_id": ""
+              },
+              {
+                "name": "member",
+                "org_id": ""
+              },
+              {
+                "name": "organization-member",
+                "org_id": "eef977e7-2354-430e-9ba5-6baec232e961"
+              }
+            ],
+            "session_token": "umXQ7lHojs-nMwBbiQLhCWzqCivH4TwJO",
+            "ssh_private_key": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\nc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90dt3fbwaYBQ3KaatHoAAA\nAIjxRADO8UQAzgAAAAtzc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90\ndt3fbwaYBQ3KaatHoAAAAEBeLYXTDRunpTr5ZVAMo8bWZLK0ZX41gqGn/QXQYG17\n9wKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0egAAAAAAECAwQF\n-----END OPENSSH PRIVATE KEY-----\n",
+            "ssh_public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0eg\n"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "oidc_access_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "session_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "ssh_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_agent",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api_key_scope": "all",
+            "arch": "amd64",
+            "auth": "token",
+            "connection_timeout": 120,
+            "dir": null,
+            "display_apps": [
+              {
+                "port_forwarding_helper": true,
+                "ssh_helper": true,
+                "vscode": true,
+                "vscode_insiders": false,
+                "web_terminal": true
+              }
+            ],
+            "env": {
+              "CURL_CA_BUNDLE": "/etc/ssl/certs/ca-certificates.crt",
+              "GIT_AUTHOR_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_AUTHOR_NAME": "default",
+              "GIT_COMMITTER_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_COMMITTER_NAME": "default",
+              "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt",
+              "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt"
+            },
+            "id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "init_script": "#!/usr/bin/env sh\nset -eux\n# Sleep for a good long while before exiting.\n# This is to allow folks to exec into a failed workspace and poke around to\n# troubleshoot.\nwaitonexit() {\n\techo \"=== Agent script exited with non-zero code ($?). Sleeping 24h to preserve logs...\"\n\tsleep 86400\n}\ntrap waitonexit EXIT\nBINARY_DIR=\"${BINARY_DIR:-$(mktemp -d -t coder.XXXXXX)}\"\nBINARY_NAME=coder\nBINARY_URL=http://172.25.144.41:3000/bin/coder-linux-amd64\ncd \"$BINARY_DIR\"\n# Attempt to download the coder agent.\n# This could fail for a number of reasons, many of which are likely transient.\n# So just keep trying!\nwhile :; do\n\t# Try a number of different download tools, as we don not know what we\n\t# will have available.\n\tstatus=\"\"\n\tif command -v curl \u003e/dev/null 2\u003e\u00261; then\n\t\tcurl -fsSL --compressed \"${BINARY_URL}\" -o \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v wget \u003e/dev/null 2\u003e\u00261; then\n\t\twget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v busybox \u003e/dev/null 2\u003e\u00261; then\n\t\tbusybox wget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telse\n\t\techo \"error: no download tool found, please install curl, wget or busybox wget\"\n\t\texit 127\n\tfi\n\techo \"error: failed to download coder agent\"\n\techo \"       command returned: ${status}\"\n\techo \"Trying again in 30 seconds...\"\n\tsleep 30\ndone\n\nif ! chmod +x $BINARY_NAME; then\n\techo \"Failed to make $BINARY_NAME executable\"\n\texit 1\nfi\n\nhaslibcap2() {\n\tcommand -v setcap /dev/null 2\u003e\u00261\n\tcommand -v capsh /dev/null 2\u003e\u00261\n}\nprintnetadminmissing() {\n\techo \"The root user does not have CAP_NET_ADMIN permission. \" + \\\n\t\t\"If running in Docker, add the capability to the container for \" + \\\n\t\t\"improved network performance.\"\n\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n}\n\n# Attempt to add CAP_NET_ADMIN to the agent binary. This allows us to increase\n# network buffers which improves network transfer speeds.\nif [ -n \"${USE_CAP_NET_ADMIN:-}\" ]; then\n\t# If running as root, we do not need to do anything.\n\tif [ \"$(id -u)\" -eq 0 ]; then\n\t\techo \"Running as root, skipping setcap\"\n\t\t# Warn the user if root does not have CAP_NET_ADMIN.\n\t\tif ! capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If not running as root, make sure we have sudo perms and the \"setcap\" +\n\t# \"capsh\" binaries exist.\n\telif sudo -nl \u0026\u0026 haslibcap2; then\n\t\t# Make sure the root user has CAP_NET_ADMIN.\n\t\tif sudo -n capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tsudo -n setcap CAP_NET_ADMIN=+ep ./$BINARY_NAME || true\n\t\telse\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If we are not running as root, cant sudo, and \"setcap\" does not exist, we\n\t# cannot do anything.\n\telse\n\t\techo \"Unable to setcap agent binary. To enable improved network performance, \" + \\\n\t\t\t\"give the agent passwordless sudo permissions and the \\\"setcap\\\" + \\\"capsh\\\" binaries.\"\n\t\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n\tfi\nfi\n\nexport CODER_AGENT_AUTH=\"token\"\nexport CODER_AGENT_URL=\"http://172.25.144.41:3000/\"\n\noutput=$(./${BINARY_NAME} --version | head -n1)\nif ! echo \"${output}\" | grep -q Coder; then\n\techo \u003e\u00262 \"ERROR: Downloaded agent binary returned unexpected version output\"\n\techo \u003e\u00262 \"${BINARY_NAME} --version output: \\\"${output}\\\"\"\n\texit 2\nfi\n\nexec ./${BINARY_NAME} agent\n",
+            "metadata": [
+              {
+                "display_name": "CPU Usage",
+                "interval": 10,
+                "key": "0_cpu_usage",
+                "order": 0,
+                "script": "coder stat cpu",
+                "timeout": 1
+              },
+              {
+                "display_name": "RAM Usage",
+                "interval": 10,
+                "key": "1_ram_usage",
+                "order": 0,
+                "script": "coder stat mem",
+                "timeout": 1
+              },
+              {
+                "display_name": "Home Disk",
+                "interval": 60,
+                "key": "3_home_disk",
+                "order": 0,
+                "script": "coder stat disk --path ${HOME}",
+                "timeout": 1
+              },
+              {
+                "display_name": "CPU Usage (Host)",
+                "interval": 10,
+                "key": "4_cpu_usage_host",
+                "order": 0,
+                "script": "coder stat cpu --host",
+                "timeout": 1
+              },
+              {
+                "display_name": "Memory Usage (Host)",
+                "interval": 10,
+                "key": "5_mem_usage_host",
+                "order": 0,
+                "script": "coder stat mem --host",
+                "timeout": 1
+              },
+              {
+                "display_name": "Load Average (Host)",
+                "interval": 60,
+                "key": "6_load_host",
+                "order": 0,
+                "script": "      echo \"`cat /proc/loadavg | awk '{ print $1 }'` `nproc`\" | awk '{ printf \"%0.2f\", $1/$2 }'\n",
+                "timeout": 1
+              },
+              {
+                "display_name": "Swap Usage (Host)",
+                "interval": 10,
+                "key": "7_swap_host",
+                "order": 0,
+                "script": "      free -b | awk '/^Swap/ { printf(\"%.1f/%.1f\", $3/1024.0/1024.0/1024.0, $2/1024.0/1024.0/1024.0) }'\n",
+                "timeout": 1
+              }
+            ],
+            "motd_file": null,
+            "order": null,
+            "os": "linux",
+            "resources_monitoring": [],
+            "shutdown_script": null,
+            "startup_script": "#set -e\nset -ex\n# Prepare user home with default files on first start.\nif [ ! -f ~/.init_done ]; then\n  cp -rT /etc/skel ~\n  touch ~/.init_done\nfi\n\n# Add any commands that should be executed at workspace startup (e.g install requirements, start a program, etc) here\n# Declare dependency on git-clone\ncoder exp sync want \"hello.js\" \"git-clone-custom\"\n\n# Wait for dependencies and mark as started\ncoder exp sync start \"hello.js\"\n\n\nnode /home/coder/nodejs-test/hello.js \n\n# Signal completion\ncoder exp sync complete \"hello.js\"\n\n",
+            "startup_script_behavior": "non-blocking",
+            "token": "f16f751c-ba1b-4397-90a2-9b39d23e074a",
+            "troubleshooting_url": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "token"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "data.coder_provisioner.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_agent",
+      "name": "second",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api_key_scope": "all",
+            "arch": "amd64",
+            "auth": "token",
+            "connection_timeout": 120,
+            "dir": null,
+            "display_apps": [
+              {
+                "port_forwarding_helper": true,
+                "ssh_helper": true,
+                "vscode": true,
+                "vscode_insiders": false,
+                "web_terminal": true
+              }
+            ],
+            "env": {
+              "CURL_CA_BUNDLE": "/etc/ssl/certs/ca-certificates.crt",
+              "GIT_AUTHOR_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_AUTHOR_NAME": "default",
+              "GIT_COMMITTER_EMAIL": "janik.schoepper@cgi.com",
+              "GIT_COMMITTER_NAME": "default",
+              "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt",
+              "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt"
+            },
+            "id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "init_script": "#!/usr/bin/env sh\nset -eux\n# Sleep for a good long while before exiting.\n# This is to allow folks to exec into a failed workspace and poke around to\n# troubleshoot.\nwaitonexit() {\n\techo \"=== Agent script exited with non-zero code ($?). Sleeping 24h to preserve logs...\"\n\tsleep 86400\n}\ntrap waitonexit EXIT\nBINARY_DIR=\"${BINARY_DIR:-$(mktemp -d -t coder.XXXXXX)}\"\nBINARY_NAME=coder\nBINARY_URL=http://172.25.144.41:3000/bin/coder-linux-amd64\ncd \"$BINARY_DIR\"\n# Attempt to download the coder agent.\n# This could fail for a number of reasons, many of which are likely transient.\n# So just keep trying!\nwhile :; do\n\t# Try a number of different download tools, as we don not know what we\n\t# will have available.\n\tstatus=\"\"\n\tif command -v curl \u003e/dev/null 2\u003e\u00261; then\n\t\tcurl -fsSL --compressed \"${BINARY_URL}\" -o \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v wget \u003e/dev/null 2\u003e\u00261; then\n\t\twget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v busybox \u003e/dev/null 2\u003e\u00261; then\n\t\tbusybox wget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telse\n\t\techo \"error: no download tool found, please install curl, wget or busybox wget\"\n\t\texit 127\n\tfi\n\techo \"error: failed to download coder agent\"\n\techo \"       command returned: ${status}\"\n\techo \"Trying again in 30 seconds...\"\n\tsleep 30\ndone\n\nif ! chmod +x $BINARY_NAME; then\n\techo \"Failed to make $BINARY_NAME executable\"\n\texit 1\nfi\n\nhaslibcap2() {\n\tcommand -v setcap /dev/null 2\u003e\u00261\n\tcommand -v capsh /dev/null 2\u003e\u00261\n}\nprintnetadminmissing() {\n\techo \"The root user does not have CAP_NET_ADMIN permission. \" + \\\n\t\t\"If running in Docker, add the capability to the container for \" + \\\n\t\t\"improved network performance.\"\n\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n}\n\n# Attempt to add CAP_NET_ADMIN to the agent binary. This allows us to increase\n# network buffers which improves network transfer speeds.\nif [ -n \"${USE_CAP_NET_ADMIN:-}\" ]; then\n\t# If running as root, we do not need to do anything.\n\tif [ \"$(id -u)\" -eq 0 ]; then\n\t\techo \"Running as root, skipping setcap\"\n\t\t# Warn the user if root does not have CAP_NET_ADMIN.\n\t\tif ! capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If not running as root, make sure we have sudo perms and the \"setcap\" +\n\t# \"capsh\" binaries exist.\n\telif sudo -nl \u0026\u0026 haslibcap2; then\n\t\t# Make sure the root user has CAP_NET_ADMIN.\n\t\tif sudo -n capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tsudo -n setcap CAP_NET_ADMIN=+ep ./$BINARY_NAME || true\n\t\telse\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If we are not running as root, cant sudo, and \"setcap\" does not exist, we\n\t# cannot do anything.\n\telse\n\t\techo \"Unable to setcap agent binary. To enable improved network performance, \" + \\\n\t\t\t\"give the agent passwordless sudo permissions and the \\\"setcap\\\" + \\\"capsh\\\" binaries.\"\n\t\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n\tfi\nfi\n\nexport CODER_AGENT_AUTH=\"token\"\nexport CODER_AGENT_URL=\"http://172.25.144.41:3000/\"\n\noutput=$(./${BINARY_NAME} --version | head -n1)\nif ! echo \"${output}\" | grep -q Coder; then\n\techo \u003e\u00262 \"ERROR: Downloaded agent binary returned unexpected version output\"\n\techo \u003e\u00262 \"${BINARY_NAME} --version output: \\\"${output}\\\"\"\n\texit 2\nfi\n\nexec ./${BINARY_NAME} agent\n",
+            "metadata": [
+              {
+                "display_name": "CPU Usage Test",
+                "interval": 10,
+                "key": "0_cpu_usage",
+                "order": 0,
+                "script": "coder stat cpu",
+                "timeout": 1
+              }
+            ],
+            "motd_file": null,
+            "order": null,
+            "os": "linux",
+            "resources_monitoring": [],
+            "shutdown_script": null,
+            "startup_script": "#set -e\nset -ex\n# Prepare user home with default files on first start.\nif [ ! -f ~/.init_done ]; then\n  cp -rT /etc/skel ~\n  touch ~/.init_done\nfi\n\n# Add any commands that should be executed at workspace startup (e.g install requirements, start a program, etc) here\necho \"a second agent has joined the template\"\n\n",
+            "startup_script_behavior": "non-blocking",
+            "token": "48fdb5bf-6880-4966-be39-7905c8adc600",
+            "troubleshooting_url": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "token"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "data.coder_provisioner.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_app",
+      "name": "nodejs",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "command": null,
+            "display_name": "Node.js Test",
+            "external": false,
+            "group": null,
+            "healthcheck": [
+              {
+                "interval": 5,
+                "threshold": 6,
+                "url": "http://localhost:3000"
+              }
+            ],
+            "hidden": false,
+            "icon": null,
+            "id": "6e16bd60-d99f-496d-a418-b4d04622511f",
+            "open_in": "slim-window",
+            "order": null,
+            "share": "owner",
+            "slug": "nodejs",
+            "subdomain": null,
+            "tooltip": null,
+            "url": "http://localhost:3000"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_app",
+      "name": "vim",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "command": "vim",
+            "display_name": "Vim",
+            "external": false,
+            "group": null,
+            "healthcheck": [],
+            "hidden": false,
+            "icon": "http://172.25.144.41:3000/icon/vim.svg",
+            "id": "a4708394-451b-4a02-a162-a70c600034f8",
+            "open_in": "slim-window",
+            "order": null,
+            "share": "owner",
+            "slug": "vim",
+            "subdomain": null,
+            "tooltip": null,
+            "url": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "second_test",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "cron": null,
+            "display_name": "Second Test",
+            "icon": null,
+            "id": "b86b3a78-2b8a-449c-ab20-85988611b62c",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/bin/sh\necho \"Hello from second agent\"\n",
+            "start_blocks_login": false,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "test_script",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "cron": null,
+            "display_name": "Test Script",
+            "icon": "/icon/git.svg",
+            "id": "cf7aa4bb-e6d6-4373-a84b-b45382d5dde2",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "    #!/bin/bash\n\n    #!/bin/bash\n    UNIT_NAME=\"my-setup\"\n\n    # Declare dependency on git-clone\n    coder exp sync want \"$UNIT_NAME\" \"git-clone-custom\"\n\n    # Wait for dependencies and mark as started\n    coder exp sync start \"$UNIT_NAME\"\n\n    # Do your work here\n    echo \"Running after git-clone completes\"\n\n    echo \"Test Echo Coder Script\"\n    cat \u003c\u003c'EOF'\nHello World\nEOF\n    echo \"start navigating and try npm run dev\"\n    cd  /home/coder/nodejs-test/\n    #npm run dev\n    #npm run dev \u0026\n\n    nohup npm run dev \u003e ~/node-dev.log 2\u003e\u00261 \u0026\n\n    # Signal completion\n    coder exp sync complete \"$UNIT_NAME\"\n\n\n    \n",
+            "start_blocks_login": false,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "python",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 2,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": [],
+            "cgroup_parent": null,
+            "cgroupns_mode": null,
+            "command": [],
+            "container_logs": null,
+            "container_read_refresh_timeout_milliseconds": 15000,
+            "cpu_period": null,
+            "cpu_quota": null,
+            "cpu_set": "",
+            "cpu_shares": 0,
+            "cpus": null,
+            "destroy_grace_seconds": null,
+            "device_read_bps": [],
+            "device_read_iops": [],
+            "device_requests": [],
+            "device_write_bps": [],
+            "device_write_iops": [],
+            "devices": [],
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": "",
+            "entrypoint": [
+              "sh",
+              "-c",
+              "sudo update-ca-certificates \u0026\u0026 #!/usr/bin/env sh\nset -eux\n# Sleep for a good long while before exiting.\n# This is to allow folks to exec into a failed workspace and poke around to\n# troubleshoot.\nwaitonexit() {\n\techo \"=== Agent script exited with non-zero code ($?). Sleeping 24h to preserve logs...\"\n\tsleep 86400\n}\ntrap waitonexit EXIT\nBINARY_DIR=\"${BINARY_DIR:-$(mktemp -d -t coder.XXXXXX)}\"\nBINARY_NAME=coder\nBINARY_URL=http://172.25.144.41:3000/bin/coder-linux-amd64\ncd \"$BINARY_DIR\"\n# Attempt to download the coder agent.\n# This could fail for a number of reasons, many of which are likely transient.\n# So just keep trying!\nwhile :; do\n\t# Try a number of different download tools, as we don not know what we\n\t# will have available.\n\tstatus=\"\"\n\tif command -v curl \u003e/dev/null 2\u003e\u00261; then\n\t\tcurl -fsSL --compressed \"${BINARY_URL}\" -o \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v wget \u003e/dev/null 2\u003e\u00261; then\n\t\twget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v busybox \u003e/dev/null 2\u003e\u00261; then\n\t\tbusybox wget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telse\n\t\techo \"error: no download tool found, please install curl, wget or busybox wget\"\n\t\texit 127\n\tfi\n\techo \"error: failed to download coder agent\"\n\techo \"       command returned: ${status}\"\n\techo \"Trying again in 30 seconds...\"\n\tsleep 30\ndone\n\nif ! chmod +x $BINARY_NAME; then\n\techo \"Failed to make $BINARY_NAME executable\"\n\texit 1\nfi\n\nhaslibcap2() {\n\tcommand -v setcap /dev/null 2\u003e\u00261\n\tcommand -v capsh /dev/null 2\u003e\u00261\n}\nprintnetadminmissing() {\n\techo \"The root user does not have CAP_NET_ADMIN permission. \" + \\\n\t\t\"If running in Docker, add the capability to the container for \" + \\\n\t\t\"improved network performance.\"\n\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n}\n\n# Attempt to add CAP_NET_ADMIN to the agent binary. This allows us to increase\n# network buffers which improves network transfer speeds.\nif [ -n \"${USE_CAP_NET_ADMIN:-}\" ]; then\n\t# If running as root, we do not need to do anything.\n\tif [ \"$(id -u)\" -eq 0 ]; then\n\t\techo \"Running as root, skipping setcap\"\n\t\t# Warn the user if root does not have CAP_NET_ADMIN.\n\t\tif ! capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If not running as root, make sure we have sudo perms and the \"setcap\" +\n\t# \"capsh\" binaries exist.\n\telif sudo -nl \u0026\u0026 haslibcap2; then\n\t\t# Make sure the root user has CAP_NET_ADMIN.\n\t\tif sudo -n capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tsudo -n setcap CAP_NET_ADMIN=+ep ./$BINARY_NAME || true\n\t\telse\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If we are not running as root, cant sudo, and \"setcap\" does not exist, we\n\t# cannot do anything.\n\telse\n\t\techo \"Unable to setcap agent binary. To enable improved network performance, \" + \\\n\t\t\t\"give the agent passwordless sudo permissions and the \\\"setcap\\\" + \\\"capsh\\\" binaries.\"\n\t\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n\tfi\nfi\n\nexport CODER_AGENT_AUTH=\"token\"\nexport CODER_AGENT_URL=\"http://172.25.144.41:3000/\"\n\noutput=$(./${BINARY_NAME} --version | head -n1)\nif ! echo \"${output}\" | grep -q Coder; then\n\techo \u003e\u00262 \"ERROR: Downloaded agent binary returned unexpected version output\"\n\techo \u003e\u00262 \"${BINARY_NAME} --version output: \\\"${output}\\\"\"\n\texit 2\nfi\n\nexec ./${BINARY_NAME} agent\n"
+            ],
+            "env": [
+              "CODER_AGENT_TOKEN=48fdb5bf-6880-4966-be39-7905c8adc600"
+            ],
+            "exit_code": null,
+            "gpus": null,
+            "group_add": null,
+            "healthcheck": null,
+            "host": [
+              {
+                "host": "host.docker.internal",
+                "ip": "host-gateway"
+              }
+            ],
+            "hostname": "af3db1e34e7f",
+            "id": "af3db1e34e7fcf7f428fe8a8e9bad13b50d848fa8b90328dcd1c56a60bc5e585",
+            "image": "codercom/ubuntu-dev-python3.7",
+            "init": false,
+            "ipc_mode": "private",
+            "labels": [],
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": 0,
+            "memory": 0,
+            "memory_reservation": 0,
+            "memory_swap": 0,
+            "mounts": [],
+            "must_run": true,
+            "name": "foo",
+            "network_data": [
+              {
+                "gateway": "172.17.0.1",
+                "global_ipv6_address": "",
+                "global_ipv6_prefix_length": 0,
+                "ip_address": "172.17.0.4",
+                "ip_prefix_length": 16,
+                "ipv6_gateway": "",
+                "mac_address": "ee:36:59:7b:cc:de",
+                "network_name": "bridge"
+              }
+            ],
+            "network_mode": "bridge",
+            "networks_advanced": [],
+            "pid_mode": null,
+            "platform": "linux",
+            "ports": [],
+            "privileged": false,
+            "publish_all_ports": false,
+            "read_only": false,
+            "remove_volumes": true,
+            "restart": "no",
+            "rm": false,
+            "runtime": "runc",
+            "security_opts": [],
+            "shm_size": 64,
+            "start": true,
+            "stdin_open": false,
+            "stop_signal": "",
+            "stop_timeout": 0,
+            "storage_opts": null,
+            "sysctls": null,
+            "timeouts": null,
+            "tmpfs": null,
+            "tty": false,
+            "ulimit": [],
+            "upload": [],
+            "user": "user",
+            "userns_mode": "",
+            "volumes": [
+              {
+                "container_path": "/usr/local/share/ca-certificates/CGI-Web-Gateway2.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/CGIWebGateway2.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              },
+              {
+                "container_path": "/usr/local/share/ca-certificates/Groupinfra-Root-CA.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/GroupinfraRootCA.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              },
+              {
+                "container_path": "/usr/local/share/ca-certificates/Zscaler-Root-CA.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/ZScalerRootCA.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              }
+            ],
+            "wait": false,
+            "wait_timeout": 60,
+            "working_dir": ""
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "env"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "workspace",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 2,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": [],
+            "cgroup_parent": null,
+            "cgroupns_mode": null,
+            "command": [],
+            "container_logs": null,
+            "container_read_refresh_timeout_milliseconds": 15000,
+            "cpu_period": null,
+            "cpu_quota": null,
+            "cpu_set": "",
+            "cpu_shares": 0,
+            "cpus": null,
+            "destroy_grace_seconds": null,
+            "device_read_bps": [],
+            "device_read_iops": [],
+            "device_requests": [],
+            "device_write_bps": [],
+            "device_write_iops": [],
+            "devices": [],
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": "",
+            "entrypoint": [
+              "sh",
+              "-c",
+              "sudo update-ca-certificates \u0026\u0026\n#!/usr/bin/env sh\nset -eux\n# Sleep for a good long while before exiting.\n# This is to allow folks to exec into a failed workspace and poke around to\n# troubleshoot.\nwaitonexit() {\n\techo \"=== Agent script exited with non-zero code ($?). Sleeping 24h to preserve logs...\"\n\tsleep 86400\n}\ntrap waitonexit EXIT\nBINARY_DIR=\"${BINARY_DIR:-$(mktemp -d -t coder.XXXXXX)}\"\nBINARY_NAME=coder\nBINARY_URL=http://172.25.144.41:3000/bin/coder-linux-amd64\ncd \"$BINARY_DIR\"\n# Attempt to download the coder agent.\n# This could fail for a number of reasons, many of which are likely transient.\n# So just keep trying!\nwhile :; do\n\t# Try a number of different download tools, as we don not know what we\n\t# will have available.\n\tstatus=\"\"\n\tif command -v curl \u003e/dev/null 2\u003e\u00261; then\n\t\tcurl -fsSL --compressed \"${BINARY_URL}\" -o \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v wget \u003e/dev/null 2\u003e\u00261; then\n\t\twget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telif command -v busybox \u003e/dev/null 2\u003e\u00261; then\n\t\tbusybox wget -q \"${BINARY_URL}\" -O \"${BINARY_NAME}\" \u0026\u0026 break\n\t\tstatus=$?\n\telse\n\t\techo \"error: no download tool found, please install curl, wget or busybox wget\"\n\t\texit 127\n\tfi\n\techo \"error: failed to download coder agent\"\n\techo \"       command returned: ${status}\"\n\techo \"Trying again in 30 seconds...\"\n\tsleep 30\ndone\n\nif ! chmod +x $BINARY_NAME; then\n\techo \"Failed to make $BINARY_NAME executable\"\n\texit 1\nfi\n\nhaslibcap2() {\n\tcommand -v setcap /dev/null 2\u003e\u00261\n\tcommand -v capsh /dev/null 2\u003e\u00261\n}\nprintnetadminmissing() {\n\techo \"The root user does not have CAP_NET_ADMIN permission. \" + \\\n\t\t\"If running in Docker, add the capability to the container for \" + \\\n\t\t\"improved network performance.\"\n\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n}\n\n# Attempt to add CAP_NET_ADMIN to the agent binary. This allows us to increase\n# network buffers which improves network transfer speeds.\nif [ -n \"${USE_CAP_NET_ADMIN:-}\" ]; then\n\t# If running as root, we do not need to do anything.\n\tif [ \"$(id -u)\" -eq 0 ]; then\n\t\techo \"Running as root, skipping setcap\"\n\t\t# Warn the user if root does not have CAP_NET_ADMIN.\n\t\tif ! capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If not running as root, make sure we have sudo perms and the \"setcap\" +\n\t# \"capsh\" binaries exist.\n\telif sudo -nl \u0026\u0026 haslibcap2; then\n\t\t# Make sure the root user has CAP_NET_ADMIN.\n\t\tif sudo -n capsh --has-p=CAP_NET_ADMIN; then\n\t\t\tsudo -n setcap CAP_NET_ADMIN=+ep ./$BINARY_NAME || true\n\t\telse\n\t\t\tprintnetadminmissing\n\t\tfi\n\n\t# If we are not running as root, cant sudo, and \"setcap\" does not exist, we\n\t# cannot do anything.\n\telse\n\t\techo \"Unable to setcap agent binary. To enable improved network performance, \" + \\\n\t\t\t\"give the agent passwordless sudo permissions and the \\\"setcap\\\" + \\\"capsh\\\" binaries.\"\n\t\techo \"This has security implications. See https://man7.org/linux/man-pages/man7/capabilities.7.html\"\n\tfi\nfi\n\nexport CODER_AGENT_AUTH=\"token\"\nexport CODER_AGENT_URL=\"http://172.25.144.41:3000/\"\n\noutput=$(./${BINARY_NAME} --version | head -n1)\nif ! echo \"${output}\" | grep -q Coder; then\n\techo \u003e\u00262 \"ERROR: Downloaded agent binary returned unexpected version output\"\n\techo \u003e\u00262 \"${BINARY_NAME} --version output: \\\"${output}\\\"\"\n\texit 2\nfi\n\nexec ./${BINARY_NAME} agent\n\n"
+            ],
+            "env": [
+              "CODER_AGENT_TOKEN=f16f751c-ba1b-4397-90a2-9b39d23e074a"
+            ],
+            "exit_code": null,
+            "gpus": null,
+            "group_add": null,
+            "healthcheck": null,
+            "host": [
+              {
+                "host": "host.docker.internal",
+                "ip": "host-gateway"
+              }
+            ],
+            "hostname": "CustomEverything",
+            "id": "c0ce7ddd90dfd16c2f6cfae00c296d88d27972bae7edfe07a4edd4329586053d",
+            "image": "codercom/enterprise-node",
+            "init": false,
+            "ipc_mode": "private",
+            "labels": [
+              {
+                "label": "coder.owner",
+                "value": "schoepperjanikcgi"
+              },
+              {
+                "label": "coder.owner_id",
+                "value": "0eba1674-9663-4ca4-bf8b-29ba820cda88"
+              },
+              {
+                "label": "coder.workspace_id",
+                "value": "6ec1ce00-0b53-4555-ac6f-a4cc07b42879"
+              },
+              {
+                "label": "coder.workspace_name",
+                "value": "CustomEverything"
+              }
+            ],
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": 0,
+            "memory": 0,
+            "memory_reservation": 0,
+            "memory_swap": 0,
+            "mounts": [],
+            "must_run": true,
+            "name": "coder-schoepperjanikcgi-customeverything",
+            "network_data": [
+              {
+                "gateway": "172.17.0.1",
+                "global_ipv6_address": "",
+                "global_ipv6_prefix_length": 0,
+                "ip_address": "172.17.0.5",
+                "ip_prefix_length": 16,
+                "ipv6_gateway": "",
+                "mac_address": "a2:1a:39:e1:39:3c",
+                "network_name": "bridge"
+              }
+            ],
+            "network_mode": "bridge",
+            "networks_advanced": [],
+            "pid_mode": null,
+            "platform": "linux",
+            "ports": [],
+            "privileged": false,
+            "publish_all_ports": false,
+            "read_only": false,
+            "remove_volumes": true,
+            "restart": "no",
+            "rm": false,
+            "runtime": "runc",
+            "security_opts": [],
+            "shm_size": 64,
+            "start": true,
+            "stdin_open": false,
+            "stop_signal": "",
+            "stop_timeout": 0,
+            "storage_opts": null,
+            "sysctls": null,
+            "timeouts": null,
+            "tmpfs": null,
+            "tty": false,
+            "ulimit": [],
+            "upload": [],
+            "user": "coder",
+            "userns_mode": "",
+            "volumes": [
+              {
+                "container_path": "/home/coder",
+                "from_container": "",
+                "host_path": "",
+                "read_only": false,
+                "selinux_relabel": "",
+                "volume_name": "coder-6ec1ce00-0b53-4555-ac6f-a4cc07b42879-home"
+              },
+              {
+                "container_path": "/usr/local/share/ca-certificates/CGI-Web-Gateway2.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/CGIWebGateway2.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              },
+              {
+                "container_path": "/usr/local/share/ca-certificates/Groupinfra-Root-CA.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/GroupinfraRootCA.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              },
+              {
+                "container_path": "/usr/local/share/ca-certificates/Zscaler-Root-CA.crt",
+                "from_container": "",
+                "host_path": "/usr/local/share/ca-certificates/corporate/ZScalerRootCA.crt",
+                "read_only": true,
+                "selinux_relabel": "",
+                "volume_name": ""
+              }
+            ],
+            "wait": false,
+            "wait_timeout": 60,
+            "working_dir": ""
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "env"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me",
+            "docker_volume.home_volume"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_image",
+      "name": "alpine",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "build": [],
+            "force_remove": null,
+            "id": "sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8balpine:latest",
+            "image_id": "sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b",
+            "keep_locally": null,
+            "name": "alpine:latest",
+            "platform": null,
+            "pull_triggers": null,
+            "repo_digest": "alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b",
+            "timeouts": null,
+            "triggers": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "docker_volume",
+      "name": "home_volume",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "cluster": [],
+            "driver": "local",
+            "driver_opts": {},
+            "id": "coder-6ec1ce00-0b53-4555-ac6f-a4cc07b42879-home",
+            "labels": [
+              {
+                "label": "coder.owner",
+                "value": "schoepperjanikcgi"
+              },
+              {
+                "label": "coder.owner_id",
+                "value": "0eba1674-9663-4ca4-bf8b-29ba820cda88"
+              },
+              {
+                "label": "coder.workspace_id",
+                "value": "6ec1ce00-0b53-4555-ac6f-a4cc07b42879"
+              },
+              {
+                "label": "coder.workspace_name_at_creation",
+                "value": "CustomEverything"
+              }
+            ],
+            "mountpoint": "/var/lib/docker/volumes/coder-6ec1ce00-0b53-4555-ac6f-a4cc07b42879-home/_data",
+            "name": "coder-6ec1ce00-0b53-4555-ac6f-a4cc07b42879-home"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.code-server-python[0]",
+      "mode": "managed",
+      "type": "coder_app",
+      "name": "code-server",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "command": null,
+            "display_name": "code-server-python",
+            "external": false,
+            "group": null,
+            "healthcheck": [
+              {
+                "interval": 5,
+                "threshold": 6,
+                "url": "http://localhost:13338/healthz"
+              }
+            ],
+            "hidden": false,
+            "icon": "/icon/code.svg",
+            "id": "78713870-c3cd-4626-891c-81d0ba95668d",
+            "open_in": "slim-window",
+            "order": null,
+            "share": "owner",
+            "slug": "code-server-python",
+            "subdomain": false,
+            "tooltip": null,
+            "url": "http://localhost:13338/"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.code-server-python[0]",
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "code-server",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "cron": null,
+            "display_name": "code-server",
+            "icon": "/icon/code.svg",
+            "id": "14125f1a-6df0-4a41-9ed4-37bf18e0f006",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/usr/bin/env bash\n\nEXTENSIONS=(\"\")\nBOLD='\\033[0;1m'\nCODE='\\033[36;40;1m'\nRESET='\\033[0m'\nCODE_SERVER=\"/tmp/code-server/bin/code-server\"\n\n# Set extension directory\nEXTENSION_ARG=\"\"\nif [ -n \"\" ]; then\n  EXTENSION_ARG=\"--extensions-dir=\"\n  mkdir -p \"\"\nfi\n\nfunction run_code_server() {\n  echo \"👷 Running code-server in the background...\"\n  echo \"Check logs at /tmp/code-server.log!\"\n  $CODE_SERVER \"$EXTENSION_ARG\" --auth none --port \"13338\" --app-name \"code-server-python\"  \u003e \"/tmp/code-server.log\" 2\u003e\u00261 \u0026\n}\n\n# Check if the settings file exists...\nif [ ! -f ~/.local/share/code-server/User/settings.json ]; then\n  echo \"⚙️ Creating settings file...\"\n  mkdir -p ~/.local/share/code-server/User\n  if command -v jq \u0026\u003e /dev/null; then\n    echo \"{}\" | jq '.' \u003e ~/.local/share/code-server/User/settings.json\n  else\n    echo \"{}\" \u003e ~/.local/share/code-server/User/settings.json\n  fi\nfi\n\n# Apply/overwrite template based settings\necho \"⚙️ Creating machine settings file...\"\nmkdir -p ~/.local/share/code-server/Machine\nif command -v jq \u0026\u003e /dev/null; then\n  echo \"{}\" | jq '.' \u003e ~/.local/share/code-server/Machine/settings.json\nelse\n  echo \"{}\" \u003e ~/.local/share/code-server/Machine/settings.json\nfi\n\n# Check if code-server is already installed for offline\nif [ \"false\" = true ]; then\n  if [ -f \"$CODE_SERVER\" ]; then\n    echo \"🥳 Found a copy of code-server\"\n    run_code_server\n    exit 0\n  fi\n  # Offline mode always expects a copy of code-server to be present\n  echo \"Failed to find a copy of code-server\"\n  exit 1\nfi\n\n# If there is no cached install OR we don't want to use a cached install\nif [ ! -f \"$CODE_SERVER\" ] || [ \"false\" != true ]; then\n  printf \"${BOLD}Installing code-server!\\n\"\n\n  # Clean up from other install (in case install prefix changed).\n  if [ -n \"$CODER_SCRIPT_BIN_DIR\" ] \u0026\u0026 [ -e \"$CODER_SCRIPT_BIN_DIR/code-server\" ]; then\n    rm \"$CODER_SCRIPT_BIN_DIR/code-server\"\n  fi\n\n  ARGS=(\n    \"--method=standalone\"\n    \"--prefix=/tmp/code-server\"\n  )\n  if [ -n \"\" ]; then\n    ARGS+=(\"--version=\")\n  fi\n\n  output=$(curl -fsSL https://code-server.dev/install.sh | sh -s -- \"${ARGS[@]}\")\n  if [ $? -ne 0 ]; then\n    echo \"Failed to install code-server: $output\"\n    exit 1\n  fi\n  printf \"🥳 code-server has been installed in /tmp/code-server\\n\\n\"\nfi\n\n# Make the code-server available in PATH.\nif [ -n \"$CODER_SCRIPT_BIN_DIR\" ] \u0026\u0026 [ ! -e \"$CODER_SCRIPT_BIN_DIR/code-server\" ]; then\n  ln -s \"$CODE_SERVER\" \"$CODER_SCRIPT_BIN_DIR/code-server\"\nfi\n\n# Get the list of installed extensions...\nLIST_EXTENSIONS=$($CODE_SERVER --list-extensions $EXTENSION_ARG)\nreadarray -t EXTENSIONS_ARRAY \u003c\u003c\u003c \"$LIST_EXTENSIONS\"\nfunction extension_installed() {\n  if [ \"false\" != true ]; then\n    return 1\n  fi\n  # shellcheck disable=SC2066\n  for _extension in \"${EXTENSIONS_ARRAY[@]}\"; do\n    if [ \"$_extension\" == \"$1\" ]; then\n      echo \"Extension $1 was already installed.\"\n      return 0\n    fi\n  done\n  return 1\n}\n\n# Install each extension...\nIFS=',' read -r -a EXTENSIONLIST \u003c\u003c\u003c \"${EXTENSIONS}\"\n# shellcheck disable=SC2066\nfor extension in \"${EXTENSIONLIST[@]}\"; do\n  if [ -z \"$extension\" ]; then\n    continue\n  fi\n  if extension_installed \"$extension\"; then\n    continue\n  fi\n  printf \"🧩 Installing extension ${CODE}$extension${RESET}...\\n\"\n  output=$($CODE_SERVER \"$EXTENSION_ARG\" --force --install-extension \"$extension\")\n  if [ $? -ne 0 ]; then\n    echo \"Failed to install extension: $extension: $output\"\n    exit 1\n  fi\ndone\n\nif [ \"false\" = true ]; then\n  if ! command -v jq \u003e /dev/null; then\n    echo \"jq is required to install extensions from a workspace file.\"\n    exit 0\n  fi\n\n  RECOMMENDATIONS_FILE=\"\"\n  RECOMMENDATIONS_QUERY=\".recommendations[]\"\n  if [ -n \"\" ]; then\n    if [ -f \"\" ]; then\n      RECOMMENDATIONS_FILE=\"\"\n      RECOMMENDATIONS_QUERY=\".extensions.recommendations[]?\"\n    else\n      echo \"⚠️ Workspace file  not found, skipping extension recommendations.\"\n    fi\n  else\n    WORKSPACE_DIR=\"$HOME\"\n    if [ -n \"\" ]; then\n      WORKSPACE_DIR=\"\"\n    fi\n    if [ -f \"$WORKSPACE_DIR/.vscode/extensions.json\" ]; then\n      RECOMMENDATIONS_FILE=\"$WORKSPACE_DIR/.vscode/extensions.json\"\n    fi\n  fi\n\n  if [ -n \"$RECOMMENDATIONS_FILE\" ]; then\n    printf \"🧩 Installing extensions from %s...\\n\" \"$RECOMMENDATIONS_FILE\"\n    # Use sed to remove single-line comments before parsing with jq\n    extensions=$(sed 's|//.*||g' \"$RECOMMENDATIONS_FILE\" | jq -r \"$RECOMMENDATIONS_QUERY\")\n    for extension in $extensions; do\n      if extension_installed \"$extension\"; then\n        continue\n      fi\n      $CODE_SERVER \"$EXTENSION_ARG\" --force --install-extension \"$extension\"\n    done\n  fi\nfi\n\nrun_code_server\n",
+            "start_blocks_login": false,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.code-server[0]",
+      "mode": "managed",
+      "type": "coder_app",
+      "name": "code-server",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "command": null,
+            "display_name": "code-server",
+            "external": false,
+            "group": null,
+            "healthcheck": [
+              {
+                "interval": 5,
+                "threshold": 6,
+                "url": "http://localhost:13337/healthz"
+              }
+            ],
+            "hidden": false,
+            "icon": "/icon/code.svg",
+            "id": "afe71468-9813-4bb7-8794-d3243d7ee496",
+            "open_in": "slim-window",
+            "order": 1,
+            "share": "owner",
+            "slug": "code-server",
+            "subdomain": false,
+            "tooltip": null,
+            "url": "http://localhost:13337/"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.code-server[0]",
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "code-server",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "cron": null,
+            "display_name": "code-server",
+            "icon": "/icon/code.svg",
+            "id": "b45f5dea-e696-4f6f-af2d-d9f7c81faa9d",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/usr/bin/env bash\n\nEXTENSIONS=(\"dracula-theme.theme-dracula,ms-azuretools.vscode-docker,mechatroner.rainbow-csv\")\nBOLD='\\033[0;1m'\nCODE='\\033[36;40;1m'\nRESET='\\033[0m'\nCODE_SERVER=\"/tmp/code-server/bin/code-server\"\n\n# Set extension directory\nEXTENSION_ARG=\"\"\nif [ -n \"\" ]; then\n  EXTENSION_ARG=\"--extensions-dir=\"\n  mkdir -p \"\"\nfi\n\nfunction run_code_server() {\n  echo \"👷 Running code-server in the background...\"\n  echo \"Check logs at /tmp/code-server.log!\"\n  $CODE_SERVER \"$EXTENSION_ARG\" --auth none --port \"13337\" --app-name \"code-server\"  \u003e \"/tmp/code-server.log\" 2\u003e\u00261 \u0026\n}\n\n# Check if the settings file exists...\nif [ ! -f ~/.local/share/code-server/User/settings.json ]; then\n  echo \"⚙️ Creating settings file...\"\n  mkdir -p ~/.local/share/code-server/User\n  if command -v jq \u0026\u003e /dev/null; then\n    echo \"{}\" | jq '.' \u003e ~/.local/share/code-server/User/settings.json\n  else\n    echo \"{}\" \u003e ~/.local/share/code-server/User/settings.json\n  fi\nfi\n\n# Apply/overwrite template based settings\necho \"⚙️ Creating machine settings file...\"\nmkdir -p ~/.local/share/code-server/Machine\nif command -v jq \u0026\u003e /dev/null; then\n  echo \"{}\" | jq '.' \u003e ~/.local/share/code-server/Machine/settings.json\nelse\n  echo \"{}\" \u003e ~/.local/share/code-server/Machine/settings.json\nfi\n\n# Check if code-server is already installed for offline\nif [ \"false\" = true ]; then\n  if [ -f \"$CODE_SERVER\" ]; then\n    echo \"🥳 Found a copy of code-server\"\n    run_code_server\n    exit 0\n  fi\n  # Offline mode always expects a copy of code-server to be present\n  echo \"Failed to find a copy of code-server\"\n  exit 1\nfi\n\n# If there is no cached install OR we don't want to use a cached install\nif [ ! -f \"$CODE_SERVER\" ] || [ \"false\" != true ]; then\n  printf \"${BOLD}Installing code-server!\\n\"\n\n  # Clean up from other install (in case install prefix changed).\n  if [ -n \"$CODER_SCRIPT_BIN_DIR\" ] \u0026\u0026 [ -e \"$CODER_SCRIPT_BIN_DIR/code-server\" ]; then\n    rm \"$CODER_SCRIPT_BIN_DIR/code-server\"\n  fi\n\n  ARGS=(\n    \"--method=standalone\"\n    \"--prefix=/tmp/code-server\"\n  )\n  if [ -n \"\" ]; then\n    ARGS+=(\"--version=\")\n  fi\n\n  output=$(curl -fsSL https://code-server.dev/install.sh | sh -s -- \"${ARGS[@]}\")\n  if [ $? -ne 0 ]; then\n    echo \"Failed to install code-server: $output\"\n    exit 1\n  fi\n  printf \"🥳 code-server has been installed in /tmp/code-server\\n\\n\"\nfi\n\n# Make the code-server available in PATH.\nif [ -n \"$CODER_SCRIPT_BIN_DIR\" ] \u0026\u0026 [ ! -e \"$CODER_SCRIPT_BIN_DIR/code-server\" ]; then\n  ln -s \"$CODE_SERVER\" \"$CODER_SCRIPT_BIN_DIR/code-server\"\nfi\n\n# Get the list of installed extensions...\nLIST_EXTENSIONS=$($CODE_SERVER --list-extensions $EXTENSION_ARG)\nreadarray -t EXTENSIONS_ARRAY \u003c\u003c\u003c \"$LIST_EXTENSIONS\"\nfunction extension_installed() {\n  if [ \"false\" != true ]; then\n    return 1\n  fi\n  # shellcheck disable=SC2066\n  for _extension in \"${EXTENSIONS_ARRAY[@]}\"; do\n    if [ \"$_extension\" == \"$1\" ]; then\n      echo \"Extension $1 was already installed.\"\n      return 0\n    fi\n  done\n  return 1\n}\n\n# Install each extension...\nIFS=',' read -r -a EXTENSIONLIST \u003c\u003c\u003c \"${EXTENSIONS}\"\n# shellcheck disable=SC2066\nfor extension in \"${EXTENSIONLIST[@]}\"; do\n  if [ -z \"$extension\" ]; then\n    continue\n  fi\n  if extension_installed \"$extension\"; then\n    continue\n  fi\n  printf \"🧩 Installing extension ${CODE}$extension${RESET}...\\n\"\n  output=$($CODE_SERVER \"$EXTENSION_ARG\" --force --install-extension \"$extension\")\n  if [ $? -ne 0 ]; then\n    echo \"Failed to install extension: $extension: $output\"\n    exit 1\n  fi\ndone\n\nif [ \"false\" = true ]; then\n  if ! command -v jq \u003e /dev/null; then\n    echo \"jq is required to install extensions from a workspace file.\"\n    exit 0\n  fi\n\n  RECOMMENDATIONS_FILE=\"\"\n  RECOMMENDATIONS_QUERY=\".recommendations[]\"\n  if [ -n \"\" ]; then\n    if [ -f \"\" ]; then\n      RECOMMENDATIONS_FILE=\"\"\n      RECOMMENDATIONS_QUERY=\".extensions.recommendations[]?\"\n    else\n      echo \"⚠️ Workspace file  not found, skipping extension recommendations.\"\n    fi\n  else\n    WORKSPACE_DIR=\"$HOME\"\n    if [ -n \"\" ]; then\n      WORKSPACE_DIR=\"\"\n    fi\n    if [ -f \"$WORKSPACE_DIR/.vscode/extensions.json\" ]; then\n      RECOMMENDATIONS_FILE=\"$WORKSPACE_DIR/.vscode/extensions.json\"\n    fi\n  fi\n\n  if [ -n \"$RECOMMENDATIONS_FILE\" ]; then\n    printf \"🧩 Installing extensions from %s...\\n\" \"$RECOMMENDATIONS_FILE\"\n    # Use sed to remove single-line comments before parsing with jq\n    extensions=$(sed 's|//.*||g' \"$RECOMMENDATIONS_FILE\" | jq -r \"$RECOMMENDATIONS_QUERY\")\n    for extension in $extensions; do\n      if extension_installed \"$extension\"; then\n        continue\n      fi\n      $CODE_SERVER \"$EXTENSION_ARG\" --force --install-extension \"$extension\"\n    done\n  fi\nfi\n\nrun_code_server\n",
+            "start_blocks_login": false,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom-py[0]",
+      "mode": "data",
+      "type": "coder_workspace_owner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "email": "janik.schoepper@cgi.com",
+            "full_name": "default",
+            "groups": [
+              "Everyone"
+            ],
+            "id": "0eba1674-9663-4ca4-bf8b-29ba820cda88",
+            "login_type": "github",
+            "name": "schoepperjanikcgi",
+            "oidc_access_token": "",
+            "rbac_roles": [
+              {
+                "name": "owner",
+                "org_id": ""
+              },
+              {
+                "name": "member",
+                "org_id": ""
+              },
+              {
+                "name": "organization-member",
+                "org_id": "eef977e7-2354-430e-9ba5-6baec232e961"
+              }
+            ],
+            "session_token": "umXQ7lHojs-nMwBbiQLhCWzqCivH4TwJO",
+            "ssh_private_key": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\nc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90dt3fbwaYBQ3KaatHoAAA\nAIjxRADO8UQAzgAAAAtzc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90\ndt3fbwaYBQ3KaatHoAAAAEBeLYXTDRunpTr5ZVAMo8bWZLK0ZX41gqGn/QXQYG17\n9wKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0egAAAAAAECAwQF\n-----END OPENSSH PRIVATE KEY-----\n",
+            "ssh_public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0eg\n"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "oidc_access_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "session_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "ssh_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom-py[0]",
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "git_clone_custom",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "cron": null,
+            "display_name": "Git Clone Custom",
+            "icon": "/icon/git.svg",
+            "id": "00dabaec-2598-42a0-9e6b-a057368b234a",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/bin/bash\ncoder exp sync start \"git-clone-custom\"\necho \"Starting custom git clone module\"\n\nif ! grep -q github.com ~/.ssh/known_hosts 2\u003e/dev/null; then\n  mkdir -p ~/.ssh\n  ssh-keyscan github.com \u003e\u003e ~/.ssh/known_hosts\nfi\n\necho \"Test if git exists\"\ngit --version\n\necho \"Test if git clone works\"\nif [ ! -d ~/nodejs-test ]; then\n  echo \"Actually cloning...\"\n  echo \"Cloning git@github.com:schoepperjanikcgi/nodejs-test.git into $HOME/nodejs-test\"\n      \n  git clone \"git@github.com:schoepperjanikcgi/nodejs-test.git\" \"$HOME/nodejs-test\"\nfi\necho \"Data schoepperjanikcgi\"\necho \"Git clone finish\"\n\necho \"Start the script\"\necho -n 'IyEvYmluL2Jhc2gKCkdSRUVUSU5HPSJTZWlkIGdlZ3LDvMOfdCIKTkFNRT0iVGhvbWFzIgoKZWNobyAiJEdSRUVUSU5HLCAkTkFNRSEi' | base64 -d \u003e \"$HOME/hello.sh\"\nchmod +x \"$HOME/hello.sh\"\n\n\"$HOME/hello.sh\" 2\u003e\u00261\ncoder exp sync complete \"git-clone-custom\"\n",
+            "start_blocks_login": true,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me",
+            "module.git-clone-custom-py.data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom-py[0]",
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "test",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": [],
+            "cgroup_parent": null,
+            "cgroupns_mode": null,
+            "command": [
+              "sh",
+              "-c",
+              "while true; do echo Hello; sleep 60; done"
+            ],
+            "container_logs": null,
+            "container_read_refresh_timeout_milliseconds": 15000,
+            "cpu_period": null,
+            "cpu_quota": null,
+            "cpu_set": "",
+            "cpu_shares": 0,
+            "cpus": null,
+            "destroy_grace_seconds": null,
+            "device_read_bps": [],
+            "device_read_iops": [],
+            "device_requests": [],
+            "device_write_bps": [],
+            "device_write_iops": [],
+            "devices": [],
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": "",
+            "entrypoint": [],
+            "env": [],
+            "exit_code": null,
+            "gpus": null,
+            "group_add": null,
+            "healthcheck": null,
+            "host": [],
+            "hostname": "055712bab006",
+            "id": "055712bab006fcabaa1870e78c0a8d5a3d093c71f3101e083c303474952fcea3",
+            "image": "sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b",
+            "init": false,
+            "ipc_mode": "private",
+            "labels": [],
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": 0,
+            "memory": 0,
+            "memory_reservation": 0,
+            "memory_swap": 0,
+            "mounts": [],
+            "must_run": true,
+            "name": "Pyton-container",
+            "network_data": [
+              {
+                "gateway": "172.17.0.1",
+                "global_ipv6_address": "",
+                "global_ipv6_prefix_length": 0,
+                "ip_address": "172.17.0.2",
+                "ip_prefix_length": 16,
+                "ipv6_gateway": "",
+                "mac_address": "d2:23:7b:7a:62:61",
+                "network_name": "bridge"
+              }
+            ],
+            "network_mode": "bridge",
+            "networks_advanced": [],
+            "pid_mode": null,
+            "platform": "linux",
+            "ports": [],
+            "privileged": false,
+            "publish_all_ports": false,
+            "read_only": false,
+            "remove_volumes": true,
+            "restart": "no",
+            "rm": false,
+            "runtime": "runc",
+            "security_opts": [],
+            "shm_size": 64,
+            "start": true,
+            "stdin_open": false,
+            "stop_signal": "",
+            "stop_timeout": 0,
+            "storage_opts": null,
+            "sysctls": null,
+            "timeouts": null,
+            "tmpfs": null,
+            "tty": false,
+            "ulimit": [],
+            "upload": [],
+            "user": "",
+            "userns_mode": "",
+            "volumes": [],
+            "wait": false,
+            "wait_timeout": 60,
+            "working_dir": "/"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "data.coder_workspace.me",
+            "docker_image.alpine"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom1[0]",
+      "mode": "data",
+      "type": "coder_workspace_owner",
+      "name": "me",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "email": "janik.schoepper@cgi.com",
+            "full_name": "default",
+            "groups": [
+              "Everyone"
+            ],
+            "id": "0eba1674-9663-4ca4-bf8b-29ba820cda88",
+            "login_type": "github",
+            "name": "schoepperjanikcgi",
+            "oidc_access_token": "",
+            "rbac_roles": [
+              {
+                "name": "owner",
+                "org_id": ""
+              },
+              {
+                "name": "member",
+                "org_id": ""
+              },
+              {
+                "name": "organization-member",
+                "org_id": "eef977e7-2354-430e-9ba5-6baec232e961"
+              }
+            ],
+            "session_token": "umXQ7lHojs-nMwBbiQLhCWzqCivH4TwJO",
+            "ssh_private_key": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\nc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90dt3fbwaYBQ3KaatHoAAA\nAIjxRADO8UQAzgAAAAtzc2gtZWQyNTUxOQAAACACmqtMWCv67/C2A/8D57iXtN90\ndt3fbwaYBQ3KaatHoAAAAEBeLYXTDRunpTr5ZVAMo8bWZLK0ZX41gqGn/QXQYG17\n9wKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0egAAAAAAECAwQF\n-----END OPENSSH PRIVATE KEY-----\n",
+            "ssh_public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKaq0xYK/rv8LYD/wPnuJe033R23d9vBpgFDcppq0eg\n"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "oidc_access_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "session_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "ssh_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom1[0]",
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "git_clone_custom",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "2789991b-ead7-46a4-aad7-f2588c6ef4e4",
+            "cron": null,
+            "display_name": "Git Clone Custom",
+            "icon": "/icon/git.svg",
+            "id": "e1a0b97c-59d9-46c5-b662-96193c76438d",
+            "log_path": null,
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/bin/bash\ncoder exp sync start \"git-clone-custom\"\necho \"Starting custom git clone module\"\n\nif ! grep -q github.com ~/.ssh/known_hosts 2\u003e/dev/null; then\n  mkdir -p ~/.ssh\n  ssh-keyscan github.com \u003e\u003e ~/.ssh/known_hosts\nfi\n\necho \"Test if git exists\"\ngit --version\n\necho \"Test if git clone works\"\nif [ ! -d ~/nodejs-test ]; then\n  echo \"Actually cloning...\"\n  echo \"Cloning git@github.com:schoepperjanikcgi/nodejs-test.git into $HOME/nodejs-test\"\n      \n  git clone \"git@github.com:schoepperjanikcgi/nodejs-test.git\" \"$HOME/nodejs-test\"\nfi\necho \"Data schoepperjanikcgi\"\necho \"Git clone finish\"\n\necho \"Start the script\"\necho -n 'IyEvYmluL2Jhc2gKCkdSRUVUSU5HPSJTZWlkIGdlZ3LDvMOfdCIKTkFNRT0iVGhvbWFzIgoKZWNobyAiJEdSRUVUSU5HLCAkTkFNRSEi' | base64 -d \u003e \"$HOME/hello.sh\"\nchmod +x \"$HOME/hello.sh\"\n\n\"$HOME/hello.sh\" 2\u003e\u00261\ncoder exp sync complete \"git-clone-custom\"\n",
+            "start_blocks_login": true,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.main",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me",
+            "module.git-clone-custom1.data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.git-clone-custom1[0]",
+      "mode": "managed",
+      "type": "docker_container",
+      "name": "test",
+      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "attach": false,
+            "bridge": "",
+            "capabilities": [],
+            "cgroup_parent": null,
+            "cgroupns_mode": null,
+            "command": [
+              "sh",
+              "-c",
+              "while true; do echo Hello; sleep 60; done"
+            ],
+            "container_logs": null,
+            "container_read_refresh_timeout_milliseconds": 15000,
+            "cpu_period": null,
+            "cpu_quota": null,
+            "cpu_set": "",
+            "cpu_shares": 0,
+            "cpus": null,
+            "destroy_grace_seconds": null,
+            "device_read_bps": [],
+            "device_read_iops": [],
+            "device_requests": [],
+            "device_write_bps": [],
+            "device_write_iops": [],
+            "devices": [],
+            "dns": null,
+            "dns_opts": null,
+            "dns_search": null,
+            "domainname": "",
+            "entrypoint": [],
+            "env": [],
+            "exit_code": null,
+            "gpus": null,
+            "group_add": null,
+            "healthcheck": null,
+            "host": [],
+            "hostname": "e025ccd9b927",
+            "id": "e025ccd9b9275f72863136934ab71e29e826a3209ea4acfb61b9e7ad80c661a8",
+            "image": "sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b",
+            "init": false,
+            "ipc_mode": "private",
+            "labels": [],
+            "log_driver": "json-file",
+            "log_opts": null,
+            "logs": false,
+            "max_retry_count": 0,
+            "memory": 0,
+            "memory_reservation": 0,
+            "memory_swap": 0,
+            "mounts": [],
+            "must_run": true,
+            "name": "base7-container",
+            "network_data": [
+              {
+                "gateway": "172.17.0.1",
+                "global_ipv6_address": "",
+                "global_ipv6_prefix_length": 0,
+                "ip_address": "172.17.0.3",
+                "ip_prefix_length": 16,
+                "ipv6_gateway": "",
+                "mac_address": "86:bd:78:e2:e7:a5",
+                "network_name": "bridge"
+              }
+            ],
+            "network_mode": "bridge",
+            "networks_advanced": [],
+            "pid_mode": null,
+            "platform": "linux",
+            "ports": [],
+            "privileged": false,
+            "publish_all_ports": false,
+            "read_only": false,
+            "remove_volumes": true,
+            "restart": "no",
+            "rm": false,
+            "runtime": "runc",
+            "security_opts": [],
+            "shm_size": 64,
+            "start": true,
+            "stdin_open": false,
+            "stop_signal": "",
+            "stop_timeout": 0,
+            "storage_opts": null,
+            "sysctls": null,
+            "timeouts": null,
+            "tmpfs": null,
+            "tty": false,
+            "ulimit": [],
+            "upload": [],
+            "user": "",
+            "userns_mode": "",
+            "volumes": [],
+            "wait": false,
+            "wait_timeout": 60,
+            "working_dir": "/"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "data.coder_workspace.me",
+            "docker_image.alpine"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.personalize[0]",
+      "mode": "managed",
+      "type": "coder_script",
+      "name": "personalize",
+      "provider": "provider[\"registry.terraform.io/coder/coder\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "agent_id": "deeaabb9-3519-49d6-b469-d23294d27854",
+            "cron": null,
+            "display_name": "Personalize",
+            "icon": "/icon/personalize.svg",
+            "id": "511933e7-a947-42c5-89e8-0e2fba440312",
+            "log_path": "~/personalize.log",
+            "run_on_start": true,
+            "run_on_stop": false,
+            "script": "#!/usr/bin/env bash\n\nBOLD='\\033[0;1m'\nCODE='\\033[36;40;1m'\nRESET='\\033[0m'\nSCRIPT=\"~/personalize\"\nSCRIPT=\"${SCRIPT/#\\~/${HOME}}\"\n\n# If the personalize script doesn't exist, educate\n# the user how they can customize their environment!\nif [ ! -f $SCRIPT ]; then\n  printf \"✨ ${BOLD}You don't have a personalize script!\\n\\n\"\n  printf \"Run ${CODE}touch ${SCRIPT} \u0026\u0026 chmod +x ${SCRIPT}${RESET} to create one.\\n\"\n  printf \"It will run every time your workspace starts. Use it to install personal packages!\\n\\n\"\n  exit 0\nfi\n\n# Check if the personalize script is executable, if not,\n# try to make it executable and educate the user if it fails.\nif [ ! -x $SCRIPT ]; then\n  echo \"🔐 Your personalize script isn't executable!\"\n  printf \"Run $CODE\\`chmod +x $SCRIPT\\`$RESET to make it executable.\\n\"\n  exit 0\nfi\n\n# Run the personalize script!\n$SCRIPT\n",
+            "start_blocks_login": true,
+            "timeout": 0
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "coder_agent.second",
+            "data.coder_provisioner.me",
+            "data.coder_workspace.me",
+            "data.coder_workspace_owner.me"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": [
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.share",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server[0].var.share",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.open_in",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server[0].var.open_in",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "resource",
+      "config_addr": "module.code-server-python.coder_script.code-server",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server-python[0].coder_script.code-server",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server-python.var.share",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server-python[0].var.share",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server-python.var.workspace",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server-python[0].var.workspace",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server-python.var.open_in",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server-python[0].var.open_in",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "resource",
+      "config_addr": "module.code-server.coder_script.code-server",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server[0].coder_script.code-server",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.code-server.var.workspace",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.code-server[0].var.workspace",
+          "status": "pass"
+        }
+      ]
+    }
+  ]
+}
+
