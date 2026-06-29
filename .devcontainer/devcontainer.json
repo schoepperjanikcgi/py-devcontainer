@@ -11,6 +11,17 @@
         "ms-python.python",
         "ms-python.black-formatter"
       ]
+    },
+      
+    "coder": {
+      "displayApps": {
+        "web_terminal": true,
+        "ssh_helper": true,
+        "port_forwarding_helper": true,
+        "vscode": true,
+        "vscode_insiders": false
+      }
     }
+  
   }
 }
