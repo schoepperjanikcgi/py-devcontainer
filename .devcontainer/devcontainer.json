@@ -16,9 +16,9 @@
     "coder": {
       "displayApps": {
         "web_terminal": true,
-        "ssh_helper": false,
+        "ssh_helper": true,
         "port_forwarding_helper": true,
-        "vscode": false,
+        "vscode": true,
         "vscode_insiders": false
       }
     }
