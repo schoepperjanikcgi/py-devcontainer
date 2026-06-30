@@ -1,10 +1,11 @@
+from urllib import request
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 from flask import Flask, send_file, render_template
-from flask import url_for
 
 app = Flask(__name__)
 print("Hello, world!!")
@@ -84,13 +85,15 @@ plt.savefig("/workspaces/py-container/plot3.svg")
 plt.close()
 @app.route("/")
 def hello():
-   return render_template('index.html')
+    print(request.url_root)
+    print(request.script_root)
+    return render_template('index.html')
 
-@app.route(url_for("plot"))
+@app.route("/bye")
 def bye():
     return "Please leave"
 
-@app.route(url_for("plot"))
+@app.route("/plot")
 def plot():
     # generate the plot
     x = np.linspace(0, 2 * np.pi, 100)
