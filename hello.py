@@ -4,6 +4,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 from flask import Flask, send_file, render_template
+from flask import url_for
 
 app = Flask(__name__)
 print("Hello, world!!")
@@ -85,11 +86,11 @@ plt.close()
 def hello():
    return render_template('index.html')
 
-@app.route("/bye")
+@app.route(url_for("plot"))
 def bye():
     return "Please leave"
 
-@app.route("/plot")
+@app.route(url_for("plot"))
 def plot():
     # generate the plot
     x = np.linspace(0, 2 * np.pi, 100)
